@@ -1,11 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module type="PYTHON_MODULE" version="4">
-  <component name="NewModuleRootManager">
-    <content url="file://$USER_HOME$/Desktop/최소걸침나무.py" />
-    <orderEntry type="inheritedJdk" />
-    <orderEntry type="sourceFolder" forTests="false" />
-  </component>
-  <component name="TestRunnerService">
-    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
-  </component>
-</module>
+def baseball(x, y):
+    global strike
+    global  ball
+    if (x - prob1)*(x - prob2)*(x - prob3) == 0:
+        if (x - y) == 0:
+            strike += 1
+        else:
+            ball += 1
+import random
+prob1=random.randint(1,9)
+prob2=random.randint(1,9)
+while prob1==prob2:
+    prob1=random.radint(1,9)
+prob3=random.randint(1,9)
+while prob3==prob1 or prob3==prob2:
+    prob3=random.radint(1,9)
+
+count=0
+sum_strike=0
+sum_ball=0
+while True:
+    strike=0
+    ball=0
+    count+=1
+    try:
+        ans=int(input("세 자리 정수를 입력하세요(100~999): "))
+    except :
+        print('숫자만 입력하세요')
+        continue
+    if ans<100 or ans>999:
+        print('3자리 정수만 입력하세요')
+        continue
+    ans1 = ans // 100
+    ans2 = (ans // 10) % 10
+    ans3 = ans % 10
+    if ans1==ans2 or ans2==ans3 or ans3==ans1:
+        print('서로 다른 세 자리 정수를 입력하세요')
+        continue
+    if ans1==0 or ans2==0 or ans3==0:
+        print('0은 안대요')
+        continue
+
+    baseball(ans1,prob1)
+    baseball(ans2,prob2)
+    baseball(ans3,prob3)
+
+    sum_strike += strike
+    sum_ball += ball
+
+    print('{} stike and {} ball'.format(strike,ball))
+
+    if strike==3:
+        print('Your right! average strike is {0:.2f} and average ball is {0:.2f}'.format(sum_strike/count,sum_ball/count))
+        break
